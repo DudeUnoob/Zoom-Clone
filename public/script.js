@@ -107,14 +107,16 @@ const playStop = () => {
 //     myVideoStream.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack) 
 //   }))
 // }
-const ss = await navigator.mediaDevices.getDisplayMedia();
-const senders = [];
-
-const screenShare = () => {
-  userMediaStream.getTracks()
-    .forEach(track => senders.push(peerConnection.addTrack(track, userMediaStream)));
+let senders = []
+const shareScreen = () => {
+  navigator.mediaDevices.getDisplayMedia({ cursor: true }).then(stream => {
+      const screenTrack = stream.getTracks()[0];
+      senders.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
+      screenTrack.onended = function() {
+          senders.current.find(sender => sender.track.kind === "video").replaceTrack(userStream.current.getTracks()[1]);
+      }
+  })
 }
-
 const setMuteButton = () => {
   const html = `
     <i class="fas fa-microphone"></i>
