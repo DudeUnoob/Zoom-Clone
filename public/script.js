@@ -101,15 +101,13 @@ const playStop = () => {
   }
 }
 
-const shareScreen = () => {
-  navigator.mediaDevices.getDisplayMedia({ cursor: true }).then(stream => {
-      const screenTrack = stream.getTracks()[0];
-      myVideoStream.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
-      screenTrack.onended = function() {
-          myVideoStream.current.find(sender => sender.track.kind === "video").replaceTrack(myVideoStream.current.getTracks()[1]);
-      }
-  })
+const screenShare = () => {
+  navigator.mediaDevices.getDisplayMedia({ cursor: true }.then(stream => {
+    const screenTrack = stream.myVideoStream()[0];
+    myVideoStream.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack) 
+  }))
 }
+
 
 const setMuteButton = () => {
   const html = `
