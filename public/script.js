@@ -101,6 +101,16 @@ const playStop = () => {
   }
 }
 
+const shareScreen = () => {
+  navigator.mediaDevices.getDisplayMedia({ cursor: true }).then(stream => {
+      const screenTrack = stream.getTracks()[0];
+      senders.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
+      screenTrack.onended = function() {
+          senders.current.find(sender => sender.track.kind === "video").replaceTrack(userStream.current.getTracks()[1]);
+      }
+  })
+}
+
 const setMuteButton = () => {
   const html = `
     <i class="fas fa-microphone"></i>
