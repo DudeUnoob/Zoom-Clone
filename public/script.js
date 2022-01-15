@@ -101,11 +101,20 @@ const playStop = () => {
   }
 }
 
-const screenShare = () => {
-  navigator.mediaDevices.getDisplayMedia({ cursor: true }.then(stream => {
-    const screenTrack = stream.myVideoStream()[0];
-    myVideoStream.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack) 
-  }))
+// const screenShare = () => {
+//   navigator.mediaDevices.getDisplayMedia({ cursor: true }.then(stream => {
+//     const screenTrack = stream.myVideoStream()[0];
+//     myVideoStream.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack) 
+//   }))
+// }
+function shareScreen() {
+  navigator.mediaDevices.getDisplayMedia({ cursor: true }).then(stream => {
+      const screenTrack = stream.getTracks()[0];
+      myVideoStream.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
+      screenTrack.onended = function() {
+          myVideoStream.current.find(sender => sender.track.kind === "video").replaceTrack(myVideoStream.current.getTracks()[1]);
+      }
+  })
 }
 
 
