@@ -107,16 +107,13 @@ const playStop = () => {
 //     myVideoStream.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack) 
 //   }))
 // }
-function shareScreen() {
-  navigator.mediaDevices.getDisplayMedia({ cursor: true }).then(stream => {
-      const screenTrack = stream.getTracks()[0];
-      myVideoStream.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
-      screenTrack.onended = function() {
-          myVideoStream.current.find(sender => sender.track.kind === "video").replaceTrack(myVideoStream.current.getTracks()[1]);
-      }
-  })
-}
+const ss = await navigator.mediaDevices.getDisplayMedia();
+const senders = [];
 
+const screenShare = () => {
+  userMediaStream.getTracks()
+    .forEach(track => senders.push(peerConnection.addTrack(track, userMediaStream)));
+}
 
 const setMuteButton = () => {
   const html = `
