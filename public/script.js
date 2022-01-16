@@ -70,6 +70,14 @@ function addVideoStream(video, stream) {
   videoGrid.append(video)
 }
 
+async function shareScreen() {
+  try {
+    let mediaStream = await navigator.mediaDevices.getDisplayMedia({video:true});
+    videoElement.srcObject = mediaStream;
+  } catch (e) {
+    console.log('Unable to acquire screen capture: ' + e);
+  }
+}
 
 
 const scrollToBottom = () => {
