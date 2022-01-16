@@ -70,12 +70,22 @@ function addVideoStream(video, stream) {
   videoGrid.append(video)
 }
 
+var displayMediaOptions = {
+  video: {
+    cursor: "always"
+  },
+  audio: true
+};
+
+const videoElem = document.getElementById("screenShare");
 async function shareScreen() {
+ 
+  
   try {
-    let mediaStream = await navigator.mediaDevices.getDisplayMedia({video:true});
-    videoElement.srcObject = mediaStream;
-  } catch (e) {
-    console.log('Unable to acquire screen capture: ' + e);
+    videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+    //dumpOptionsInfo();
+  } catch(err) {
+    console.error("Error: " + err);
   }
 }
 

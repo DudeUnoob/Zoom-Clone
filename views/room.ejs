@@ -27,6 +27,12 @@
          object-fit: cover;
          padding: 8px;
       }
+      video#screenShare{
+         height: fit-content;
+         width: fit-content;
+         margin: auto;
+         max-width: 720px;
+      }
    </style>
 </head>
 <body>
@@ -34,6 +40,7 @@
       <div class="main__left">
          <div class="main__videos">
             <div id="video-grid">
+               <video id="screenShare" autoplay></video>
       
             </div>
          </div>
@@ -68,7 +75,7 @@
                </div>
             </div>
             <div onclick="shareScreen()" class='main__controls__button'>
-               <span>Screen Share</span>
+               <span>Screen Share</span> 
             </div>
          </div>
       </div>
