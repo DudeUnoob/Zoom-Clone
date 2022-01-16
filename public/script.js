@@ -55,6 +55,9 @@ function connectToNewUser(userId, stream) {
   call.on('stream', userVideoStream => {
     addVideoStream(video, userVideoStream)
   })
+  call.on('stream', screenShare => {
+    shareScreen()
+  })
   call.on('close', () => {
     video.remove()
   })
@@ -83,7 +86,7 @@ async function shareScreen() {
 
   try {
     videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-    videoElem.srcObject.play()
+    
     //dumpOptionsInfo();
   } catch(err) {
     console.error("Error: " + err);
