@@ -85,9 +85,9 @@ async function shareScreen() {
 
   try {
     
-    videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+    videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions)
 
-    videoGrid.append(videoElem.srcObject)
+    
     
     //dumpOptionsInfo();
   } catch(err) {
