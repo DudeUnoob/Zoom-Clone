@@ -80,9 +80,10 @@ var displayMediaOptions = {
 const videoElem = document.getElementById("screenShare");
 async function shareScreen() {
  
-  
+
   try {
     videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+    videoElem.srcObject.play()
     //dumpOptionsInfo();
   } catch(err) {
     console.error("Error: " + err);
