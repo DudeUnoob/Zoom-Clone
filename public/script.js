@@ -55,9 +55,7 @@ function connectToNewUser(userId, stream) {
   call.on('stream', userVideoStream => {
     addVideoStream(video, userVideoStream)
   })
-  call.on('stream', screenShare => {
-    shareScreen()
-  })
+
   call.on('close', () => {
     video.remove()
   })
@@ -71,6 +69,7 @@ function addVideoStream(video, stream) {
     video.play()
   })
   videoGrid.append(video)
+  shareScreen()
 }
 
 var displayMediaOptions = {
