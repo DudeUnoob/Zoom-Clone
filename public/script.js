@@ -86,6 +86,7 @@ async function shareScreen() {
   try {
     
     videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions)
+    addVideoStream(video, videoElem.srcObject)
 
     
     
@@ -93,7 +94,11 @@ async function shareScreen() {
   } catch(err) {
     console.error("Error: " + err);
   }
-}
+}  
+
+
+
+
 
 
 const scrollToBottom = () => {
