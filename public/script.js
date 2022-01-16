@@ -1,5 +1,3 @@
-const Peer = require("peerjs");
-
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 const myPeer = new Peer(undefined, {
@@ -102,13 +100,6 @@ const playStop = () => {
     myVideoStream.getVideoTracks()[0].enabled = true;
   }
 }
-
-const shareScreen = () => {
-  navigator.mediaDevices.getDisplayMedia({ cursor: true }.then(stream => {
-    addVideoStream(stream)
-  }))
-}
-
 
 const setMuteButton = () => {
   const html = `
