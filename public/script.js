@@ -1,3 +1,5 @@
+const Peer = require("peerjs");
+
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 const myPeer = new Peer(undefined, {
@@ -101,22 +103,13 @@ const playStop = () => {
   }
 }
 
-// const screenShare = () => {
-//   navigator.mediaDevices.getDisplayMedia({ cursor: true }.then(stream => {
-//     const screenTrack = stream.myVideoStream()[0];
-//     myVideoStream.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack) 
-//   }))
-// }
-let senders = []
 const shareScreen = () => {
-  navigator.mediaDevices.getDisplayMedia({ cursor: true }).then(stream => {
-      const screenTrack = stream.getTracks()[0];
-      senders.current.find(sender => sender.track.kind === 'video').replaceTrack(screenTrack);
-      screenTrack.onended = function() {
-          senders.current.find(sender => sender.track.kind === "video").replaceTrack(userStream.current.getTracks()[1]);
-      }
-  })
+  navigator.mediaDevices.getDisplayMedia({ cursor: true }.then(stream => {
+    addVideoStream(stream)
+  }))
 }
+
+
 const setMuteButton = () => {
   const html = `
     <i class="fas fa-microphone"></i>
