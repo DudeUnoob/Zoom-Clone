@@ -69,7 +69,7 @@ function addVideoStream(video, stream) {
     video.play()
   })
   videoGrid.append(video)
-  videoGrid.append(shareScreen())
+  //videoGrid.append(shareScreen(shared))
 }
 
 var displayMediaOptions = {
@@ -84,7 +84,10 @@ async function shareScreen() {
  
 
   try {
+    
     videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+
+    addVideoStream(videoElem, stream)   
     
     //dumpOptionsInfo();
   } catch(err) {
