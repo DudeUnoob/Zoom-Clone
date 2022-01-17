@@ -69,7 +69,7 @@ function addVideoStream(video, stream) {
     video.play()
   })
   videoGrid.append(video)
-  videoGrid.append(shareScreen())
+  //videoGrid.append(shareScreen())
 }
 
 var displayMediaOptions = {
