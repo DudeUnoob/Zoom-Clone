@@ -54,7 +54,6 @@ function connectToNewUser(userId, stream) {
   const video = document.createElement('video')
   call.on('stream', userVideoStream => {
     addVideoStream(video, userVideoStream)
-    //addVideoStream(video, videoElem.srcObject)
   })
 
   call.on('close', () => {
@@ -70,9 +69,7 @@ function addVideoStream(video, stream) {
     video.play()
   })
   videoGrid.append(video)
-  
-  
-  //videoGrid.append(shareScreen(shared))
+  videoGrid.append(shareScreen())
 }
 
 var displayMediaOptions = {
@@ -84,24 +81,15 @@ var displayMediaOptions = {
 
 const videoElem = document.getElementById("screenShare");
 async function shareScreen() {
- 
 
   try {
-    
-    videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions)
-    addVideoStream(video, videoElem.srcObject)
-
-    
+    videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
     
     //dumpOptionsInfo();
   } catch(err) {
     console.error("Error: " + err);
   }
-}  
-
-
-
-
+}
 
 
 const scrollToBottom = () => {
